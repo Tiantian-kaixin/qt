@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>imagePicker.qml</file>
+        <file>Reapeter.qml</file>
     </qresource>
 </RCC>

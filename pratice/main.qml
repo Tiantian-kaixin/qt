@@ -5,46 +5,33 @@ import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.0
 
 Window {
+    id:root
     visible: true
     width: 640
     height: 480
-    title: qsTr("image picker")
-    Image{
-        id:canvas
-        anchors.left: parent.left
-        Layout.preferredWidth: parent.width
-        Layout.preferredHeight: parent.height - 30
-        fillMode: Image.PreserveAspectFit
-        width: parent.width
-        height: parent.height-30
-    }
-
+    title: qsTr("pratice")
     Row{
-        id:row
-        height: 30
-        anchors.top: canvas.bottom
         Button{
-           text: qsTr("选择图片")
-           anchors.verticalCenter: parent.verticalCenter
-           onClicked: {
-               fileDialog.open()
-           }
+            text: "imagePicker"
+            onClicked: {
+                var com = Qt.createComponent("imagePicker.qml");
+                if (com.status === Component.Ready){
+                    var imagePicker = com.createObject(root)
+                    imagePicker.show()
+                }
+            }
         }
-        Text {
-            id: name
-            anchors.verticalCenter: parent.verticalCenter
-
-            text: qsTr("text")
-        }
-    }
-
-    FileDialog{
-        id:fileDialog
-        nameFilters: ["*.png"]
-        onAccepted: {
-            canvas.source = fileDialog.fileUrls[0]
-            name.text = fileDialog.fileUrls[0].toString()
-
+        Button{
+            text: "repeater"
+            onClicked: {
+                var components = Qt.createComponent("Reapeter.qml")
+                if(components.status === Component.Ready){
+                    var repeater = components.createObject(root)
+                    repeater.show()
+                }
+            }
         }
     }
+
+
 }
